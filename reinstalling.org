@@ -1,0 +1,119 @@
+#+title: Getting things working again
+
+Congrats; you borked your computer again.  Nice.  classic you, amirite?
+
+
+* Installing stuff from ppas
+LEts get the basics installed.
+#+BEGIN_SRC bash
+for prog in git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata;
+do
+  sudo apt install $prog -y
+done
+
+
+#+END_SRC
+
+* Conda
+Now, lets get miniconda installed
+#+BEGIN_SRC bash
+ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+#+END_SRC
+
+
+* profile, etc:
+Lets get your paths sorted out.
+#+BEGIN_SRC bash
+echo "source .nickstuff" >> ~/.bashrc
+#+END_SRC
+
+This is the contents of your nickstuff file
+#+BEGIN_SRC bash
+# .nickstuff
+
+##### stuff for aesthetics, etc
+alias pyclean='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
+alias duh="du ./ --max-depth 1 -h"
+alias diffy='diff -y --suppress-common-lines'
+
+
+if [ "$HOST" = 'gruffalo' ]; then
+    export HOST_COLOR="\[033[1;36m\]"
+fi
+
+
+# custom
+FIG='Z  .   .. ..... .....
+.M........ .. .........                .
+.M ... . . .  ..  .. .
+  M  .   .  .
+   M..  ..  ............
+  .  MM . .       . . .
+      MMMMMMMMMMMMMMMMMMMMMM. .
+. . .MMMMMMMMMMMMMMMMMMMMMMMMM....
+    .MMMMMMMMMMMMMMMMMMMMMMMMMMM, ...
+  . .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO..
+    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM .
+  MMMMMMMMMMMMM . MMMMMMMMM..  MMMMMM...
+..MMMMMM.MMMMM. . .IMMMMM . .  M. MMMM.
+  MM  .. MMM. . . .DMM MMMM ..  ... M...
+. MM ..   MM=..     MM ..NMM .  . .. ..
+..MM ......MM  . .  .MM.   MM~..   . ...
+  M ... .  .MM  . .  8M.  ..M:  .   ....
+  MM  .   . .MM      .MM. .MM        ...
+.   . .   .   .   . .
+                         GlassGiant.com'
+kptrk(){
+    source ~/.bash-preexec.sh
+    if [ "$KPTRK_ON" = true ]
+    then
+	echo "KeePTRacK is disabled"
+	preexec() { true; }
+	precmd() { true; }
+	export KPTRK_ON=false
+	export KPTRK_DIR=0
+    else
+	export KPTRK_DIR=$(pwd)
+	echo "$FIG"
+	echo "KeePTRacK is enabled!"
+	preexec() { printf "$(date)\t$1 \n">> $KPTRK_DIR/kptrk_README; }
+	precmd() { echo "kptrk is on"; }
+	export KPTRK_ON=true
+    fi
+}
+
+# get rid of files added when running setup.py
+rmsetup(){
+    python setup.py install --record files.txt
+    cat files.txt | xargs rm -rf
+}
+
+# prompt stuff
+# my default PS1
+export PS1_def="\[\033[38;5;49m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;139m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\]]\$(__git_ps1) \[$(tput sgr0)\]"
+
+# teaching PS1
+export PS1_teach="\[\033[38;5;202m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]"
+
+export PS1=$PS1_def
+EDITOR=/usr/bin/nano
+gitc() {
+  #I am too laxy to type in the full path
+  git clone "https://github.com/$1"
+}
+#+END_SRC
+
+* emacs packages
+Right, now you need to install some emacs packages
+
+#+BEGIN_SRC bash
+cd ~/.emacs.d/various/
+# column marker package
+wget https://www.emacswiki.org/emacs/download/column-marker.el
+
+# workgroup package
+git clone https://github.com/tlh/workgroups.el.git
+
+#+END_SRC
