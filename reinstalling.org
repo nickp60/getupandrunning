@@ -1,10 +1,10 @@
 #+title: Getting things working again
 
-Congrats; you borked your computer again.  Nice.  classic you, amirite?
+Congrats, Nick; you borked your computer again. Nice. classic you, amirite?  Luckily, past-Nick has your back.  Your welcome.
 
 
 * Installing stuff from ppas
-LEts get the basics installed.
+Lets get the basics installed.
 #+BEGIN_SRC bash
 for prog in git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata;
 do
@@ -19,12 +19,20 @@ Now, lets get miniconda installed
 #+BEGIN_SRC bash
  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
+conda config --add channels defaults
+conda config --add channels conda-forge
+conda config --add channels bioconda
 
 #+END_SRC
 
-
 * profile, etc:
-Lets get your paths sorted out.
+first, grab `bash_preexec.sh1`
+#+BEGIN_SRC
+curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o ~/.bash-preexec.sh
+#+END_SRC
+
+
+Lets get your profiles sorted out.
 #+BEGIN_SRC bash
 echo "source .nickstuff" >> ~/.bashrc
 #+END_SRC
@@ -106,9 +114,10 @@ gitc() {
 #+END_SRC
 
 * emacs packages
-Right, now you need to install some emacs packages
+Right, now you need to install some emacs packages that arent on MELPA.  These should be included in the repo, but if not, here ya go.
 
 #+BEGIN_SRC bash
+
 cd ~/.emacs.d/various/
 # column marker package
 wget https://www.emacswiki.org/emacs/download/column-marker.el
@@ -116,4 +125,21 @@ wget https://www.emacswiki.org/emacs/download/column-marker.el
 # workgroup package
 git clone https://github.com/tlh/workgroups.el.git
 
+#+END_SRC
+For python syntax checking, ensure that you have pycodestyle (formerly pep8) and pylint installed.
+
+
+** MELPA packages
+for other packages to install, see the init file.  Heres the ones I remember:
+
+- flymake
+- ox-gfm
+- ess
+-
+* Various packages
+Add ~/bin/, and add it to your path, moron.
+** Bandage
+https://rrwick.github.io/Bandage/
+#+BEGIN_SRC bash
+https://github.com/rrwick/Bandage/releases/download/v0.8.1/Bandage_Ubuntu_dynamic_v0_8_1.zip
 #+END_SRC
