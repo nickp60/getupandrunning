@@ -6,7 +6,7 @@ Congrats, Nick; you borked your computer again. Nice. classic you, amirite?  Luc
 * Installing stuff from ppas
 Lets get the basics installed.
 #+BEGIN_SRC bash
-for prog in git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata;
+for prog in git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata :
 do
   sudo apt install $prog -y
 done
@@ -14,6 +14,16 @@ done
 
 #+END_SRC
 
+
+And also these,n which you will need later for certian R packages:
+
+#+BEGIN_SRC bash
+for prog in libssl-dev libxml2-dev libcurl4-openssl-dev;
+do
+  sudo apt install $prog -y
+done
+
+#+END_SRC
 * Conda
 Now, lets get miniconda installed
 #+BEGIN_SRC bash
@@ -143,3 +153,16 @@ https://rrwick.github.io/Bandage/
 #+BEGIN_SRC bash
 https://github.com/rrwick/Bandage/releases/download/v0.8.1/Bandage_Ubuntu_dynamic_v0_8_1.zip
 #+END_SRC
+
+* TinyTex
+See installation from https://yihui.name/tinytex/
+#+BEGIN_SRC
+wget -qO- \
+  "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | sh
+
+tlmgr install texliveonfly
+
+#+END_SRC
+* R
+Someone else did the hard work for you.  Download this gist, and run it:
+https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7
