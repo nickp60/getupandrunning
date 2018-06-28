@@ -166,3 +166,20 @@ tlmgr install texliveonfly
 * R
 Someone else did the hard work for you.  Download this gist, and run it:
 https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7
+* i3
+All of the i3 config info should be in the .config directory.
+
+You will need to install a few things manually.
+- fontawesome
+- i3blocks
+
+* TravisCI
+This shouldn't be a surprise, but you don't know much about cryptography, so it is.  You will need to update all the travis encrpted creds whenever you try to deply to pypi again.  So you will need to install travis:
+
+#+BEGIN_SRC bash
+gem install travis
+
+travis encrypt **********
+#+END_SRC
+
+replace the existing credentials with this, and then deploy.
