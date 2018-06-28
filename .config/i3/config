@@ -96,16 +96,16 @@ bindsym $mod+a focus parent
 # set $w4 "4. Librecalc "
 # set $w5 "5. PDFs "
 # set $w6 "6. SSH "
-set $w1 "1. "
-set $w2 "2. "
-set $w3 "3. "
-set $w4 "4. "
-set $w5 "5. "
-set $w6 "6. "
-set $w7 "7. "
-set $w8 8
-set $w9 "9. "
-set $w10 "10. "
+set $w1 "  1.   "
+set $w2 "  2.   "
+set $w3 "  3.   "
+set $w4 "  4.   "
+set $w5 "  5.   "
+set $w6 "  6.   "
+set $w7 "  7.   "
+set $w8 "  8.   "
+set $w9 "  9.   "
+set $w10 "  10.   "
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -145,25 +145,36 @@ bindsym $mod+Shift+0 move container to workspace $w10
 
 
 # get window names with xprop, set the default starting locations here
+# w1 random terminal stuff
 assign [class="Gnome-Terminal"] $w1
-assign [class="Emacs*"] $w2
-assign [class="Firefox"] $w3
-assign [class="libreoffice-calc"] $w4
-assign [class="Evince"] $w5
-assign [class="sshterm"] $w6
-assign [class="Inkscape"] $w7
-# assign [class="Inkscape"] $w7
-assign [class="gitterm"] $w9
-assign [class="Google-chrome"] $w10
-
-
-exec firefox
-exec google-chrome -private https://www.youtube.com
 exec i3-sensible-terminal
+# w2 for coding
+assign [class="Emacs*"] $w2
 exec emacs
-# exec xterm -name "MY_SSH_TERMINAL"
-exec terminator --class gitterm
+# w3 for the internet
+assign [class="Firefox"] $w3
+exec firefox
+# w4 for spreadsheets
+assign [class="libreoffice-calc"] $w4
+# w5  for reading pdfs
+assign [class="Evince"] $w5
+# w6  for file browser
+assign [class="Nautilus"] $w6
+exec nautilus ~ --no-desktop
+# w7  for drawing stuff
+assign [class="Inkscape"] $w7
+# w8  for ssh-ing
+assign [class="sshterm"] $w8
 exec terminator --class sshterm
+# w9 -- for git
+assign [class="gitterm"] $w9
+exec terminator --class gitterm
+# w10 -- music
+assign [class="Google-chrome"] $w10
+assign [class="Rhythmbox"] $w10
+exec google-chrome -private https://www.youtube.com
+
+
 
 # Move between workspaces
 bindsym Mod1+Control+Left workspace prev
@@ -207,8 +218,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 
 # noone likes caps lock
-exec 'sleep 20'
-exec "setxkbmap -option 'ctrl:nocaps'"
+exec_always 'sleep 20'
+exec_always "setxkbmap -option 'ctrl:nocaps'"
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # Pulse Audio controls
