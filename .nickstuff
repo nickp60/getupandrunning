@@ -72,3 +72,6 @@ gitc() {
 alias e='emacs -nw -q'
 
 alias pdf="evince"
+# this should allow me to use Ctrl+s in a ssh session without it doing
+# the default thing of freezing
+stty -ixon

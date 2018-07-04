@@ -90,22 +90,19 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# set $w1 "1. Terminal "
-# set $w2 "2. Emacs "
-# set $w3 "3. Firefox "
-# set $w4 "4. Librecalc "
-# set $w5 "5. PDFs "
-# set $w6 "6. SSH "
-set $w1 "  1.   "
-set $w2 "  2.   "
-set $w3 "  3.   "
-set $w4 "  4.   "
-set $w5 "  5.   "
-set $w6 "  6.   "
-set $w7 "  7.   "
-set $w8 "  8.   "
-set $w9 "  9.   "
-set $w10 "  10.   "
+# Set some cool icons for the workspaces
+
+# set $w1 "1      "  # general use terminal
+set $w1 "1     "
+set $w2 "2     "
+set $w3 "3     "
+set $w4 "4     "
+set $w5 "5     "
+set $w6 "6     "
+set $w7 "7     "
+set $w8 "8     "
+set $w9 "9     "
+set $w10 "10     "
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -145,34 +142,38 @@ bindsym $mod+Shift+0 move container to workspace $w10
 
 
 # get window names with xprop, set the default starting locations here
-# w1 random terminal stuff
-assign [class="Gnome-Terminal"] $w1
-exec i3-sensible-terminal
+# w1 random terminal stuff and Git
+assign [class="*1term"] $w1
+exec xterm --class base1term
+exec ~/.config/tmuxstartup.sh
+# exec terminator --class git1term
+
 # w2 for coding
 assign [class="Emacs*"] $w2
 exec emacs
 # w3 for the internet
 assign [class="Firefox"] $w3
 exec firefox
-# w4 for spreadsheets
-assign [class="libreoffice-calc"] $w4
+# w4 for spreadsheets, etc
+assign [class="*offic*"] $w4
+# assign [class="libreoffice-calc"] $w4
 # w5  for reading pdfs
 assign [class="Evince"] $w5
 # w6  for file browser
 assign [class="Nautilus"] $w6
-exec nautilus ~ --no-desktop
+# exec nautilus ~ --no-desktop
 # w7  for drawing stuff
 assign [class="Inkscape"] $w7
 # w8  for ssh-ing
 assign [class="sshterm"] $w8
 exec terminator --class sshterm
-# w9 -- for git
-assign [class="gitterm"] $w9
-exec terminator --class gitterm
+# w9 -- for Rstudio
+assign [class="RStudio"] $w9
 # w10 -- music
 assign [class="Google-chrome"] $w10
 assign [class="Rhythmbox"] $w10
-exec google-chrome -private https://www.youtube.com
+# exec google-chrome --incognito https://www.youtube.com
+exec google-chrome  https://www.youtube.com
 
 
 
@@ -245,6 +246,7 @@ bar {
     }
     #mode hide
     position top
+    strip_workspace_numbers yes
     # i3bar_command $HOME/.config/polybar/launch.sh
     # status_command i3blocks
     status_command i3blocks -c ~/.config/i3/i3status.conf
@@ -269,6 +271,13 @@ exec --no-startup-id udiskie -ans &
 
 # use polybar
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+
+# stop following mouse; i need to be able to use color pickers
+focus_follows_mouse no
+
+
+
 
 ####### Stuff that doesn;t work yet
 # make the menu key another mod?

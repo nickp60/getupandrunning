@@ -6,7 +6,7 @@ Congrats, Nick; you borked your computer again. Nice. classic you, amirite?  Luc
 * Installing stuff from ppas
 Lets get the basics installed.
 #+BEGIN_SRC bash
-for prog in git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata :
+for prog in htop tree git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata :
 do
   sudo apt install $prog -y
 done
