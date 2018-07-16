@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+readarray -t output <<< $(mpstat 1 1 | tail -n +5 | awk '{print (100-$12)}')
+
+logfile="$HOME/.config/i3/i3blocks/cpulog"
+if [ -f "$logfile" ]
+then
+    #    echo "found"
+    :
+else
+#    echo "not found"
+    echo -e "0\n0\n0\n0\n0" > $logfile
+fi
+
+readarray past < $logfile
+#echo ${past[@]}
+
+newline=${past[@]:1:5}
+#echo $newline
+newline="$newline $output"
+#echo $newline
+rm $logfile
+example ="_.…₋-⁻¯"
+pp=""
+for line in $newline
+do
+    intline=${line%.*}
+    if (( $intline < 5 ))
+    then
+	pp="${pp}_"
+    elif (( $intline < 10 ))
+    then
+	pp="${pp}."
+    elif (( $intline < 15 ))
+    then
+	pp="${pp}…"
+    elif (( $intline < 40 ))
+    then
+	pp="${pp}₋"
+    elif (( $intline < 60 ))
+    then
+	pp="${pp}-"
+    elif (( $intline < 80 ))
+    then
+	pp="${pp}⁻"
+    elif (( $intline <= 95 ))
+    then
+	pp="${pp}¨"
+    elif (( $intline <= 100 ))
+    then
+	pp="${pp}¯"
+    fi
+    echo $line >> $logfile
+done
+echo $pp$line%

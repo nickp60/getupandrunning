@@ -87,9 +87,10 @@ do
         squares="■■■■■"
     fi
 
-    if [[ "${statuses[$i]}" = "Unknown" ]]; then
-        squares="<sup>?</sup>$squares"
-    fi
+    # we just assume that I'm plugged in
+    # if [[ "${statuses[$i]}" = "Unknown" ]]; then
+    #     squares="<sup>?</sup>$squares"
+    # fi
 
     case "${statuses[$i]}" in
     "Charging")
