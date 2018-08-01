@@ -147,7 +147,8 @@ bindsym $mod+Shift+0 move container to workspace $w10
 # get window names with xprop, set the default starting locations here
 # w1 random terminal stuff and Git
 assign [class="*1term"] $w1
-exec xterm --class base1term -e ~/.config/tmuxstartup.sh
+#exec xterm --class base1term -e ~/.config/tmuxstartup.sh
+exec_always xterm --class base1term
 # exec terminator --class git1term
 
 # w2 for coding
@@ -157,8 +158,8 @@ exec emacs
 assign [class="Firefox"] $w3
 exec firefox
 # w4 for spreadsheets, etc
-assign [class="*offic*"] $w4
-# assign [class="libreoffice-calc"] $w4
+# assign [class="*offic*"] $w4
+assign [class="libreoffice-calc"] $w4
 # w5  for reading pdfs
 assign [class="Evince"] $w5
 # w6  for file browser
@@ -279,7 +280,7 @@ focus_follows_mouse no
 
 
 #  displays
-set $displayMode "Set display mode [s]tand  [l]aptop [x]panic [m]irror"
+set $displayMode "Set display mode [s]tand  [d]ouble [l]aptop [x]panic [m]irror"
 bindsym $mod+x mode $displayMode
 mode $displayMode {
     bindsym s exec "\
@@ -289,8 +290,10 @@ mode $displayMode {
                 ~/.config/i3/scripts/default.sh"; \
                 mode "default"
 
-    bindsym x exec "xrandr --output LVDS-1 --auto --output HDMI1 --off --output VGA-1 --off"; mode "default"
+    bindsym x exec "xrandr --output LVDS-1 --auto --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off"; mode "default"
     bindsym m exec "xrandr --output VGA-1 --auto --output LVDS-1 --same-as VGA-1"; mode "default"
+    bindsym d exec "xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal"; mode "default"
+
 
     # bindsym l exec "\
     #             ~/.config/i3/scripts/laptop-display.sh && \
@@ -301,10 +304,19 @@ mode $displayMode {
     bindsym Escape mode "default"
 }
 
-exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Viñuela.jpg
+# exec_always --no-startup-id feh  --no-xinerama --bg-fill /usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Viñuela.jpg
+
+exec_always --no-startup-id feh --no-xinerama  --bg-fill ~/Downloads/IMG_1446_new.JPG
 
 exec gvfs-mime --set inode/directory Thunar.desktop
 
+# move window to right when multiple monitors
+bindsym $mod+m move workspace to output right
+bindsym $mod+n move workspace to output left
+
+
+
+exec_always compton --config ~/.config/compton.conf
 
 ####### Stuff that doesn;t work yet
 # make the menu key another mod?

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 readarray -t output <<< $(mpstat 1 1 | tail -n +5 | awk '{print (100-$12)}')
 
+# this log file keeps track fo the past 5 values by d
 logfile="$HOME/.config/i3/i3blocks/cpulog"
 if [ -f "$logfile" ]
 then
@@ -19,7 +20,7 @@ newline=${past[@]:1:5}
 newline="$newline $output"
 #echo $newline
 rm $logfile
-example ="_.…₋-⁻¯"
+example ="_.…₋-⁻¨¯"
 pp=""
 for line in $newline
 do
