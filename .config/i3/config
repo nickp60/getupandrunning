@@ -174,11 +174,11 @@ exec terminator --class sshterm
 # w9 -- for Rstudio
 assign [class="RStudio"] $w9
 # w10 -- music
-assign [class="Google-chrome"] $w10
+assign [class="Chromium-browser"] $w10
 assign [class="Rhythmbox"] $w10
 # exec google-chrome --incognito https://www.youtube.com
-exec google-chrome  https://www.youtube.com
-
+exec chromium-browser https://www.youtube.com
+exec rhythmbox
 
 # Move between workspaces
 bindsym Mod1+Control+Left workspace prev
