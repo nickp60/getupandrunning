@@ -6,7 +6,7 @@ RUN chmod a+rx /usr/local/bin/fix-permissions
 
 RUN git config --global user.email "nickp60@gmail.com" && git config --global user.name "Nick Waters" && git config --global credential.helper cache
 RUN sudo apt-get update && apt-get install openjdk-11-jdk -y
-RUN pip install black google-cloud-storage cromwell-tools nbdev
+RUN pip install black google-cloud-storage cromwell-tools nbdev gcsfs seaborn
 RUN jupyter nbextension install https://github.com/drillan/jupyter-black/archive/master.zip --user && jupyter nbextension enable jupyter-black-master/jupyter-black
-RUN fix-permissions /home/jovyan/.local/
+RUN fix-permissions /home/jovyan/.local/ && fix-permissions /opt/conda/lib/
 USER $NB_UID
