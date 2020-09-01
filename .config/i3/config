@@ -99,7 +99,7 @@ bindsym $mod+a focus parent
 set $w1 "1     "
 set $w2 "2     "
 set $w3 "3     "
-set $w4 "4     "
+set $w4 "4     "
 set $w5 "5     "
 set $w6 "6     "
 set $w7 "7     "
@@ -153,13 +153,14 @@ exec_always xterm --class base1term
 
 # w2 for coding
 assign [class="Emacs*"] $w2
-exec emacs
+exec emacs -nw ~/GitHub/
 # w3 for the internet
 assign [class="Firefox"] $w3
 exec firefox
 # w4 for spreadsheets, etc
 # assign [class="*offic*"] $w4
-assign [class="libreoffice-calc"] $w4
+assign [class="Slack"] $w4
+exec slack
 # w5  for reading pdfs
 assign [class="Evince"] $w5
 # w6  for file browser
@@ -230,9 +231,10 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+# Sreen brightness controls; xps13 wont work with xbacklight, so install brightness+
+# git clone https://github.com/jappeace/brightnessctl.git
+bindsym XF86MonBrightnessUp exec brightness+  # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightness- # decrease screen brightness
 
 
 bar {
@@ -290,9 +292,10 @@ mode $displayMode {
                 ~/.config/i3/scripts/default.sh"; \
                 mode "default"
 
-    bindsym x exec "xrandr --output LVDS-1 --auto --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off"; mode "default"
-    bindsym m exec "xrandr --output VGA-1 --auto --output LVDS-1 --same-as VGA-1"; mode "default"
-    bindsym d exec "xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal"; mode "default"
+    bindsym x exec "xrandr --output eDP-1 --auto --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off"; mode "default"
+    bindsym v exec "xrandr --output DP-1 --auto --rotate right --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output eDP-1 --off"; mode "default"
+    bindsym m exec "xrandr --output eDP-1 --auto --output DP-1 --same-as eDP-1"; mode "default"
+    bindsym d exec "xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal"; mode "default"
 
 
     # bindsym l exec "\

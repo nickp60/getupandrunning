@@ -6,7 +6,7 @@ Congrats, Nick; you borked your computer again. Nice. classic you, amirite?  Luc
 * Installing stuff from ppas
 Lets get the basics installed.
 #+BEGIN_SRC bash
-for prog in i3 i3status i3blocks thunar rofi htop tree git keepassx gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata chromium-browser
+for prog in i3 i3status i3blocks compton thunar rofi htop tree git fonts-font-awesome tmux gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata chromium-browser xbacklight
 do
   sudo apt install $prog -y
 done
@@ -24,6 +24,34 @@ do
 done
 
 #+END_SRC
+
+* Gcloud tools
+
+#+BEGIN_SRC bash
+
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt-get install apt-transport-https ca-certificates gnupg
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+#+END_SRC
+
+
+* Docker
+
+#+BEGIN_SRC bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint.
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io~
+#+END_SRC
+
+
 * Conda
 Now, lets get miniconda installed
 #+BEGIN_SRC bash
@@ -56,10 +84,9 @@ cd ~/.emacs.d/various/
 # column marker package
 wget https://www.emacswiki.org/emacs/download/column-marker.el
 
-# workgroup package
-git clone https://github.com/tlh/workgroups.el.git
 
 #+END_SRC
+
 For python syntax checking, ensure that you have pycodestyle (formerly pep8) and pylint installed.
 
 
@@ -80,6 +107,7 @@ find . -name '*.elc' | xargs rm
 
 * Various packages
 Add ~/bin/, and add it to your path, moron.
+
 ** Bandage
 https://rrwick.github.io/Bandage/
 #+BEGIN_SRC bash
@@ -98,15 +126,29 @@ tlmgr install texliveonfly
 * R
 Someone else did the hard work for you.  Download this gist, and run it:
 https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+sudo apt-get update
+sudo apt-get install r-base
+sudo apt-get install gdebi-core
+# go download the latest rstudio from browser
+sudo gdebi ~/Downloads/rstudio-1.3.1073-amd64.deb
+rm ~/Downloads/*.deb
+
+
 * i3
+
 All of the i3 config info should be in the .config directory.
 
-You will need to install a few things manually.
-- fontawesome
-
-to setup, clone this repo, delete your exisiting (mostly empty) config dir, and symlink the one in this repo
+To setup, clone this repo, delete your exisiting (mostly empty) config dir, and symlink the one in this repo
 #+BEGIN_SRC
-ln -s ~/GitHub/getupandrunning/.config/ ~/
+for thing in i3 .nickstuff .tmux.conf 
+do 
+   ln -s ~/GitHub/getupandrunning/${thing} ~/
+done
+
+
 #+END_SRC
 * TravisCI
 This shouldn't be a surprise, but you don't know much about cryptography, so it is.  You will need to update all the travis encrpted creds whenever you try to deply to pypi again.  So you will need to install travis:
