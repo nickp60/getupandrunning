@@ -319,7 +319,7 @@ bindsym $mod+n move workspace to output left
 
 
 
-exec_always compton --config ~/.config/compton.conf
+exec_always --no-startup-id compton  #--config ~/.config/compton.conf
 
 ####### Stuff that doesn;t work yet
 # make the menu key another mod?
