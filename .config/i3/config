@@ -9,7 +9,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+#set $mod Mod4
+set $mod Mod1
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -37,6 +39,20 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+
+##############3  I3 GAPS
+for_window [class=".*"] border pixel 0
+gaps inner 15
+gaps outer 15
+# Activate smart borders (always)
+smart_borders on
+
+# Activate smart borders (only when there are effectively no gaps)
+smart_borders no_gaps
+border_radius 3
+###############
+
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -160,7 +176,6 @@ exec firefox
 # w4 for spreadsheets, etc
 # assign [class="*offic*"] $w4
 assign [class="Slack"] $w4
-exec slack
 # w5  for reading pdfs
 assign [class="Evince"] $w5
 # w6  for file browser
@@ -178,7 +193,7 @@ assign [class="RStudio"] $w9
 assign [class="Chromium-browser"] $w10
 assign [class="Rhythmbox"] $w10
 # exec google-chrome --incognito https://www.youtube.com
-exec chromium-browser https://www.youtube.com
+exec chromium-browser https://open.spotify.com
 exec rhythmbox
 
 # Move between workspaces
@@ -191,6 +206,21 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You out?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id  ~/.config/i3/i3exit.sh lock, mode "default"
+    bindsym e exec --no-startup-id  ~/.config/i3/i3exit.sh logout, mode "default"
+    bindsym s exec --no-startup-id  ~/.config/i3/i3exit.sh suspend, mode "default"
+    bindsym h exec --no-startup-id  ~/.config/i3/i3exit.sh hibernate, mode "default"
+    bindsym r exec --no-startup-id  ~/.config/i3/i3exit.sh reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id  ~/.config/i3/i3exit.sh shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -268,7 +298,7 @@ client.urgent           #002b36 #dc322f #fdf6e3 #002b36
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
 # start rofi as launcher
-bindsym $mod+d exec rofi -show run  -lines 5 -eh 2 -width 80 -padding 80 -opacity "85" -bw 0 -bc "#002b36" -bg "#002b36" -fg "#586e75" -hlbg "#002b36" -hlfg "#9575cd" -font "inconsolata 14"
+bindsym $mod+d exec rofi -show run  -lines 5 -eh 2 -width 80 -padding 80 -opacity 85 -bw 0 -bc "#002b36" -bg "#002b36" -fg "#586e75" -hlbg "#002b36" -hlfg "#9575cd" -font "inconsolata 14"
 
 # this helps by mounting usb disks by default
 exec --no-startup-id udiskie -ans &
@@ -294,7 +324,7 @@ mode $displayMode {
 
     bindsym x exec "xrandr --output eDP-1 --auto --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off"; mode "default"
     bindsym v exec "xrandr --output DP-1 --auto --rotate right --output HDMI1 --off --output VGA-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output eDP-1 --off"; mode "default"
-    bindsym m exec "xrandr --output eDP-1 --auto --output DP-1 --same-as eDP-1"; mode "default"
+    bindsym m exec "xrandr --auto"; mode "default"
     bindsym d exec "xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal"; mode "default"
 
 
@@ -309,7 +339,8 @@ mode $displayMode {
 
 # exec_always --no-startup-id feh  --no-xinerama --bg-fill /usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Viñuela.jpg
 
-exec_always --no-startup-id feh --no-xinerama  --bg-fill ~/Downloads/IMG_1446_new.JPG
+exec_always --no-startup-id feh --no-xinerama  --bg-fill /home/nick/Pictures/wallpapers/darkmountain.jpg
+
 
 exec gvfs-mime --set inode/directory Thunar.desktop
 
@@ -319,7 +350,7 @@ bindsym $mod+n move workspace to output left
 
 
 
-exec_always --no-startup-id compton  #--config ~/.config/compton.conf
+exec_always --no-startup-id compton  --config ~/.config/compton.conf
 
 ####### Stuff that doesn;t work yet
 # make the menu key another mod?

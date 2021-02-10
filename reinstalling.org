@@ -6,10 +6,14 @@ Congrats, Nick; you borked your computer again. Nice. classic you, amirite?  Luc
 * Installing stuff from ppas
 Lets get the basics installed.
 #+BEGIN_SRC bash
-for prog in i3 i3status i3blocks compton thunar rofi htop tree git fonts-font-awesome tmux gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata chromium-browser xbacklight
+for prog in i3 i3status i3blocks compton feh thunar rofi htop tree git fonts-font-awesome tmux gnome-tweak-tool terminator exfat-utils exfat-fuse emacs indicator-multiload fonts-inconsolata chromium-browser xbacklight
 do
   sudo apt install $prog -y
 done
+
+sudo add-apt-repository ppa:kgilmer/speed-ricer
+sudo apt-get update
+sudo apt-get install i3-gaps
 
 
 #+END_SRC
