@@ -35,7 +35,8 @@ floating_modifier $mod
 hide_edge_borders both
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $HOME/.local/kitty.app/bin/kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -349,8 +350,7 @@ bindsym $mod+m move workspace to output right
 bindsym $mod+n move workspace to output left
 
 
-
-exec_always --no-startup-id compton  --config ~/.config/compton.conf
+exec_always --no-startup-id compton -b -f  --config ~/.config/compton.conf
 
 ####### Stuff that doesn;t work yet
 # make the menu key another mod?

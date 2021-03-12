@@ -69,9 +69,11 @@ gitc() {
   git clone "https://github.com/$1"
 }
 
-alias e='emacs -nw -q'
+alias e='emacs -nw'
 
 alias pdf="evince"
 # this should allow me to use Ctrl+s in a ssh session without it doing
 # the default thing of freezing
 stty -ixon
+
+export TERMINAL=$HOME/.local/kitty.app/bin/kitty
