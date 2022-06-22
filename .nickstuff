@@ -1,6 +1,6 @@
 ##### stuff fo aesthetics, etc
 alias pyclean='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
-alias duh="du ./ --max-depth 1 -h"
+alias duh="du  --max-depth 1 -h ./"
 alias diffy='diff -y --suppress-common-lines'
 
 
@@ -55,6 +55,10 @@ rmsetup(){
     cat files.txt | xargs rm -rf
 }
 
+# curl -o ~/.git-prompt.sh  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+source ~/.git-prompt.sh
+
+
 # prompt stuff
 # my default PS1
 export PS1_def="\[\033[38;5;49m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;139m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\]]\$(__git_ps1) \[$(tput sgr0)\]"
@@ -75,3 +79,5 @@ alias pdf="evince"
 # this should allow me to use Ctrl+s in a ssh session without it doing
 # the default thing of freezing
 stty -ixon
+
+alias xl='open -a "Microsoft Excel"'
