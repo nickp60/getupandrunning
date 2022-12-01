@@ -1,6 +1,5 @@
 ##### stuff fo aesthetics, etc
-alias pyclean='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
-alias duh="du ./ --max-depth 1 -h"
+alias duh="du --max-depth 1 -h"
 alias diffy='diff -y --suppress-common-lines'
 
 
@@ -49,12 +48,13 @@ kptrk(){
     fi
 }
 
-# get rid of files added when running setup.py
-rmsetup(){
-    python setup.py install --record files.txt
-    cat files.txt | xargs rm -rf
-}
 
+if [ ! -f "$HOME/git-prompt.sh" ]
+then
+    curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/git-prompt.sh
+fi
+
+source ~/git-prompt.sh
 # prompt stuff
 # my default PS1
 export PS1_def="\[\033[38;5;49m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;139m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\]]\$(__git_ps1) \[$(tput sgr0)\]"
@@ -75,3 +75,7 @@ alias pdf="evince"
 # this should allow me to use Ctrl+s in a ssh session without it doing
 # the default thing of freezing
 stty -ixon
+
+lastlog() {
+find $1/logs/cluster -type f -printf '%C@\t%p\n' | sort -n | tail -1 | cut -f 2
+}
