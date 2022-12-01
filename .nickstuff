@@ -55,6 +55,8 @@ then
 fi
 
 source ~/git-prompt.sh
+
+
 # prompt stuff
 # my default PS1
 export PS1_def="\[\033[38;5;49m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;139m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\]]\$(__git_ps1) \[$(tput sgr0)\]"
@@ -79,3 +81,4 @@ stty -ixon
 lastlog() {
 find $1/logs/cluster -type f -printf '%C@\t%p\n' | sort -n | tail -1 | cut -f 2
 }
+alias xl='open -a "Microsoft Excel"'
