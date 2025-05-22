@@ -83,3 +83,9 @@ alias xl='open -a "Microsoft Excel"'
 smkdest() {
 echo !!  | sed "s|.*--directory||g" |  tr -s " " | cut -f 2 -d " "
 }
+export ISABL_PG_USER="wgkGHihgTbJjbszLUQVQJEAapWmfPlvF"
+export ISABL_PG_PW="1I3g8bmfnNDIFK6WylfxwPNTAngH1A5tSvAtS2PxgIqlOd3SvM0EJakpc5Ntt4qj"
+export ISABL_PG_DB=isabl_microbiome
+export MURINE_REDCAP_TOKEN=77A6DB1F0D7D6655A22A91C4E9593E52
+export MMFSEQ_REDCAP_TOKEN=45922F4472D30721F491EAE43A723ED7
+export VDBPHI_REDCAP_TOKEN=A2C444CE177A582F933FB434F34C7762
