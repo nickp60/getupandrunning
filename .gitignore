@@ -1,5 +1,6 @@
 #*
 *~
+<<<<<<< HEAD
 Pictures/
 bin/
 Downloads/
@@ -7,3 +8,11 @@ GitHub/
 Desktop/
 .Rproj.user
 .config/i3/i3blocks/cpulog
+=======
+tramp
+.emacs.desktop
+.org-id-locations
+ac-comphist.dat
+local.el
+org-roam.db
+>>>>>>> 6858840 (update gitignore)
